@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Book</title>
+    <title>Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +50,7 @@
         {% endfor%}
         {% endif%}
         <div class="d-flex justify-content-between align-items-center">
-            <a href="" data-bs-toggle="modal" data-bs-target="#addLibraryModal" class="btn btn-primary px-4 py-3 btn-sm">Add new Book</a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#addEmpModal" class="btn btn-primary px-4 py-3 btn-sm">Add new Employee</a>
             <div>
                 <form action="" method="post" class="d-flex">
                     {%csrf_token%}
@@ -63,78 +63,72 @@
             <thead>
               <tr>
                 <th scope="col">id</th>
-                <th scope="col">Book Name</th>
-                <th scope="col">Book Author</th>
-                <th scope="col">Publisher</th>
-                <th scope="col">Year of Publication</th>
-                <th scope="col">Number of pages</th>
-                <th scope="col">Price</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Employee Id</th>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Employee Email</th>
+                <th scope="col">MobileNumber</th>
+                <th scope="col">Position</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody class="table-group-divider">
-              {% for library in librarys %}
+              {% for empp in emps %}
               <tr>
-                <th>{{library.id}}</th>
-                <td>{{library.name}}</td>
-                <td>{{library.author}}</td>
-                <td>{{library.publisher}}</td>
-                <td>{{library.publication}}</td>
-                <td>{{library.pages}}</td>
-                <td>{{library.price}}</td>
+                <th>{{empp.id}}</th>
+                <td>{{empp.empid}}</td>
+                <td>{{empp.name}}</td>
+                <td>{{empp.email}}</td>
+                <td>{{empp.Mob}}</td>
+                <td>{{empp.pos}}</td>
                 <td>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#updateLibraryModal_{{library.id}}"  class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#deleteLibraryModal_{{library.id}}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#updateEmpModal_{{empp.id}}"  class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#deleteEmpModal_{{empp.id}}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                 </td>
             </tr>
-                <div class="modal fade" id="updateLibraryModal_{{library.id}}" tabindex="-1" aria-labelledby="upadteLibraryModalLabel_{{library.id}}" aria-hidden="true">
+                <div class="modal fade" id="updateEmpModal_{{empp.id}}" tabindex="-1" aria-labelledby="upadteEmpModalLabel_{{empp.id}}" aria-hidden="true">
                     <div class="modal-dialog">
                       <form action="" method="POST">
                         {% csrf_token%}
                         <div class="modal-content">
                             <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="updateLibraryModalLabel_{{library.id}}">Add new Book</h1>
+                              <h1 class="modal-title fs-5" id="updateEmpModalLabel_{{empp.id}}">Add new Empolyee</h1>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden" name="id" value="{{library.id}}">
+                                <input type="hidden" name="id" value="{{empp.id}}">
                               <div class="">
-                                <label for="name">Book Name</label>
-                                <input type="text" name="name" class="form-control"  value="{{library.name}}" id="name" required>
+                                <label for="empid">Employee ID</label>
+                                <input type="number" name="empid" class="form-control" value="{{ empp.empid }}" id="empid" required>
                               </div>
                               <br>
                               <div class="">
-                                <label for="author">Book Author</label>
-                                <input type="text" name="author" class="form-control" value="{{library.author}}" id="author" required >
+                                <label for="name">Employee Name</label>
+                                <input type="text" name="name" class="form-control" value="{{empp.name }}" id="name" required>
                               </div>
                               <br>
                               <div class="">
-                                <label for="publisher">Publisher</label>
-                                <input type="text" name="publisher" class="form-control" value="{{ library.publisher }}" id="publisher" required>
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" value="{{empp.email }}" id="email" required>
                               </div>
 
                               <br>
                               <div class="">
-                                <label for="publication">Publication</label>
-                                <input type="text" name="publication" class="form-control" value="{{ library.publication }}" id="publication" required>
+                                <label for="Mob">MobileNumber</label>
+                                <input type="text" name="Mob" class="form-control" value="{{ empp.Mob }}" id="Mob" required>
                               </div>
 
                               <br>
                               <div class="">
-                                <label for="pages">Number of Pages</label>
-                                <input type="text" name="pages" class="form-control" value="{{ library.pages }}" id="pages" required>
+                                <label for="pos">Position</label>
+                                <input type="text" name="pos" class="form-control" value="{{empp.pos}}" id="pos" required>
                               </div>
 
-                              <br>
-                              <div class="">
-                                <label for="price">Price</label>
-                                <input type="text" name="price" class="form-control" value="{{ library.price }}" id="price" required>
-                              </div>
+                              
                               
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary" name="update">Update new Book</button>
+                              <button type="submit" class="btn btn-primary" name="update">Update new Employee</button>
                             </div>
                           </div>
                           </form>
@@ -142,11 +136,11 @@
                       </div>
                       
 
-                      <div class="modal fade" id="deleteLibraryModal_{{library.id}}" tabindex="-1" aria-labelledby="addLibraryModalLabel_{{library.id}}" aria-hidden="true">
+                      <div class="modal fade" id="deleteEmpModal_{{empp.id}}" tabindex="-1" aria-labelledby="addEmpModalLabel_{{empp.id}}" aria-hidden="true">
                         <div class="modal-dialog">
                           <form action="" method="post">
                             {% csrf_token%}
-                            <input type="hidden" name="id" value="{{library.id}}">
+                            <input type="hidden" name="id" value="{{empp.id}}">
                             <div class="modal-content">
                                 
                                 <div class="modal-body">
@@ -159,62 +153,52 @@
                             </form>
                             </div>
                           </div>
-                          
-
-                      
-             
               {% endfor%}
             </tbody>
           </table>
     </div>
 
-    <div class="modal fade" id="addLibraryModal" tabindex="-1" aria-labelledby="addLibraryModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addEmpModal" tabindex="-1" aria-labelledby="addEmpModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <form action="" method="post">
             {% csrf_token%}
             <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="addLibraryModalLabel">Add new Book</h1>
+                  <h1 class="modal-title fs-5" id="addEmpModalLabel">Add new Employee</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <input type="hidden" name="id" value="{{library.id}}">
+                  <input type="hidden" name="id" value="{{empp.id}}">
                 <div class="">
-                  <label for="name">Book Name</label>
-                  <input type="text" name="name" class="form-control"  value="{{library.name}}" id="name" required>
+                  <label for="empid">Employee ID</label>
+                  <input type="number" name="empid" class="form-control" value="{{ empp.empid }}" id="empid" required>
                 </div>
                 <br>
                 <div class="">
-                  <label for="author">Book Author</label>
-                  <input type="text" name="author" class="form-control" value="{{library.author}}" id="author" required >
+                  <label for="name">Employee Name</label>
+                  <input type="text" name="name" class="form-control" value="{{empp.name }}" id="name" required>
                 </div>
                 <br>
                 <div class="">
-                  <label for="publisher">Publisher</label>
-                  <input type="text" name="publisher" class="form-control" value="{{ library.publisher }}" id="publisher" required>
+                  <label for="email">Email</label>
+                  <input type="email" name="email" class="form-control" value="{{empp.email }}" id="email" required>
                 </div>
 
                 <br>
                 <div class="">
-                  <label for="publication">Publication</label>
-                  <input type="text" name="publication" class="form-control" value="{{ library.publication }}" id="publication" required>
+                  <label for="Mob">MobileNumber</label>
+                  <input type="text" name="Mob" class="form-control" value="{{ empp.Mob }}" id="Mob" required>
                 </div>
 
                 <br>
                 <div class="">
-                  <label for="pages">Number of Pages</label>
-                  <input type="text" name="pages" class="form-control" value="{{ library.pages }}" id="pages" required>
+                  <label for="pos">Position</label>
+                  <input type="text" name="pos" class="form-control" value="{{empp.pos}}" id="pos" required>
                 </div>
 
-                <br>
-                <div class="">
-                  <label for="price">Price</label>
-                  <input type="text" name="price" class="form-control" value="{{ library.price }}" id="price" required>
-                </div>     
-                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary" name="add">Add new Book</button>
+                  <button type="submit" class="btn btn-primary" name="add">Add new Employee</button>
                 </div>
               </div>
             </form>
